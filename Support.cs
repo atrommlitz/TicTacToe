@@ -44,47 +44,77 @@ namespace TicTacToe
             int spotToCheck = 0;
             string winner = "noWinner";
 
-                for (int i = 0; i < 3; i++)
+            for (int i = 0; i < 3; i++)
+            {
+                // Check rows if the first spot in row isnt a dash
+                if (board[i * 3] != "_")
                 {
-                    // Check rows
                     if (board[i * 3] == board[i * 3 + 1] && board[i * 3 + 1] == board[i * 3 + 2])
                     {
                         gameOver = true;
                         spotToCheck = i * 3;
                     }
+                }
 
-                    // Check columns
+                // Check columns if the first spot in the column isnt a dash
+                if (board[i] != "_")
+                {
                     if (board[i] == board[i + 3] && board[i + 3] == board[i + 6])
                     {
                         gameOver = true;
                         spotToCheck = i;
                     }
                 }
+            }
 
-                // Check diagonals
+            // Check diagonals if the first spot isnt a dash
+            if (board[0] != "_")
+            {
                 if (board[0] == board[4] && board[4] == board[8])
                 {
                     gameOver = true;
                     spotToCheck = 0;
                 }
+            }
 
+            if (board[2] != "_")
+            {
                 if (board[2] == board[4] && board[4] == board[6])
                 {
                     gameOver = true;
                     spotToCheck = 2;
                 }
+            }
 
             // check which player won
             if (gameOver == true)
             {
                 if (board[spotToCheck] == "x")
                 {
-                    Console.WriteLine("Congrats Player 1, that's a dub.");
+                    Console.WriteLine("Congrats Player X, that's a dub.");
+                    for (int i = 0; i < board.Count; i++)
+                    {
+                        Console.Write(board[i]);
+                        Console.Write(" ");
+                        if (i == 2 || i == 5 || i == 8)
+                        {
+                            Console.Write("\n");
+                        }
+                    }
                     winner = "PlayerX";
                 }
-                else
+                else if (board[spotToCheck] == "o")
                 {
-                    Console.WriteLine("Congrats Player 2, that's a dub.");
+                    Console.WriteLine("Congrats Player O, that's a dub.");
+                    for (int i = 0; i < board.Count; i++)
+                    {
+                        Console.Write(board[i]);
+                        Console.Write(" ");
+                        if (i == 2 || i == 5 || i == 8)
+                        {
+                            Console.Write("\n");
+                        }
+                    }
                     winner = "PlayerO";
                 }
             }

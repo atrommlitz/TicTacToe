@@ -23,7 +23,7 @@ internal class Program
             gameBoard[i] = "_";
         }
 
-        while (movesCount < 9 && !gameOver) // Check gameOver flag in loop condition.
+        while (movesCount < 9 && !gameOver && sp.GameWinner(gameBoard) == "noWinner") // Check gameOver flag in loop condition.
         {
 
             bool isValidInput = false;
@@ -50,19 +50,19 @@ internal class Program
                 gameBoard[input] = "x";
                 movesCount++;
 
-                sp.GameWinner(gameBoard);
+                //sp.GameWinner(gameBoard);
 
                 if (movesCount >= 9)
                 {
-                    gameOver = true; // End the game if board is full or a win condition is met.
+                    gameOver = true; // End the game if board is full
                 }
             }
 
-            if (gameOver) break; // Break out of the loop if the game is over after X's turn.
+            if (gameOver || sp.GameWinner(gameBoard) != "noWinner") break; // Break out of the loop if the game is over after X's turn.
 
             bool isValidInput2 = false;
 
-            if (!gameOver) // Only proceed with O's turn if the game isn't over.
+            if (!gameOver && sp.GameWinner(gameBoard) == "noWinner") // Only proceed with O's turn if the game isn't over.
             {
                 while (!isValidInput2)
                 {
@@ -85,8 +85,6 @@ internal class Program
                     isValidInput2 = true;
                     gameBoard[input] = "o";
                     movesCount++;
-
-                    sp.GameWinner(gameBoard);
                     
 
                     if (movesCount >= 9)
