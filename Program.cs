@@ -1,25 +1,88 @@
 ﻿internal class Program
 {
+    private static void Main(string[] args)
+    {
+        Driver();
+    }
+
     private static void Driver()
     {
         Console.WriteLine("Welcome to our Tic Tac Toe Game!");
 
-        print
-
         string[] gameBoard = new string[9];
-        bool gameOver = false;
         int input = 0;
+        int movesCount = 0;
+        bool gameOver = false; // Flag to indicate the game should end.
 
         for (int i = 0; i < gameBoard.Length; i++)
         {
             gameBoard[i] = "_";
         }
 
-        for (int i = 0; i < gameBoard.Length; i++)
+        while (movesCount < gameBoard.Length && !gameOver) // Check gameOver flag in loop condition.
         {
-            Console.WriteLine("X, it is your turn! Where would you like to go?");
-            input = Console.ReadLine();
-            gameBoard[input] = "X";
+
+            bool isValidInput = false;
+
+            while (!isValidInput)
+            {
+                Console.WriteLine("X, it is your turn! Where would you like to go?");
+                bool isNumeric = int.TryParse(Console.ReadLine(), out input);
+
+                if (!isNumeric || input < 0 || input > 8)
+                {
+                    Console.WriteLine("Please enter a valid spot on the board.");
+                    continue;
+                }
+                else if (gameBoard[input] != "_") // Check if the spot is taken.
+                {
+                    Console.WriteLine("Please enter a spot that hasn't been used.");
+                    continue;
+                }
+
+                isValidInput = true;
+                gameBoard[input] = "x";
+                movesCount++;
+
+                if (movesCount >= gameBoard.Length)
+                {
+                    gameOver = true; // End the game if board is full or a win condition is met.
+                }
+            }
+
+            if (gameOver) break; // Break out of the loop if the game is over after X's turn.
+
+            bool isValidInput2 = false;
+
+            if (!gameOver) // Only proceed with O's turn if the game isn't over.
+            {
+                while (!isValidInput2)
+                {
+                    Console.WriteLine("O, it is your turn! Where would you like to go?");
+                    bool isNumeric = int.TryParse(Console.ReadLine(), out input);
+
+                    if (!isNumeric || input < 0 || input > 8)
+                    {
+                        Console.WriteLine("Please enter a valid spot on the board.");
+                        continue;
+                    }
+                    else if (gameBoard[input] != "_") // Check if the spot is taken.
+                    {
+                        Console.WriteLine("Please enter a spot that hasn't been used.");
+                        continue;
+                    }
+
+                    isValidInput2 = true;
+                    gameBoard[input] = "o";
+                    movesCount++;
+
+                    if (movesCount >= gameBoard.Length)
+                    {
+                        gameOver = true; // End the game if board is full or a win condition is met.
+                    }
+                }
+            }
         }
+        Console.WriteLine("Thanks for playing!");
     }
 }
