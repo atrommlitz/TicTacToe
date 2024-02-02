@@ -38,36 +38,33 @@ namespace TicTacToe
 
         public void GameWinner(List<string> board)
         {
-
-            List<List<int>> winningCombinations = new List<List<int>>
-            {
-                new List<int> { 0, 1, 2 }, // Top row
-                new List<int> { 3, 4, 5 }, // Middle row
-                new List<int> { 6, 7, 8 }, // Bottom row
-                new List<int> { 0, 3, 6 }, // Left column
-                new List<int> { 1, 4, 7 }, // Middle column
-                new List<int> { 2, 5, 8 }, // Right column
-                new List<int> { 0, 4, 8 }, // Diagonal top-left to bottom-right
-                new List<int> { 2, 4, 6 }  // Diagonal top-right to bottom-left
-            };
-
-            for (int i=0; i < board.Count; ++i)
-            {
-                if (board[0] == winningCombinations[i])(board[0] == winningCombinations[i][0] &&)
+                for (int i = 0; i < 3; i++)
                 {
-                    if (board[0] == "x")
+                    // Check rows
+                    if (board[i * 3] == board[i * 3 + 1] && board[i * 3 + 1] == board[i * 3 + 2])
                     {
-                        Console.WriteLine("Congrats player 1, that's a dub.");
+                        return board[i * 3];
                     }
-                    else
+
+                    // Check columns
+                    if (board[i] == board[i + 3] && board[i + 3] == board[i + 6])
                     {
-                        Console.WriteLine("Congrats player 2, that's a dub.");
+                        return board[i];
                     }
                 }
-                else
+
+                // Check diagonals
+                if (board[0] == board[4] && board[4] == board[8])
                 {
-                    break;
+                    return board[0];
                 }
+
+                if (board[2] == board[4] && board[4] == board[6])
+                {
+                    return board[2];
+                }
+
+                return -1; // No winner yet
             }
 
         }
