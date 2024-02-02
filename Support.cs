@@ -21,52 +21,76 @@ namespace TicTacToe
         public void PrintBoard(List<string> board)
         {
 
-            string legend = "1 2 3 \n 4 5 6 \n 7 8 9";
+            string legend = "1 2 3 \n4 5 6 \n7 8 9";
 
             for (int i = 0; i < board.Count; i++) 
             {
-                Console.WriteLine(board[i]);
-                if(i == 2 || i == 5)
+                Console.Write(board[i]);
+                Console.Write(" ");
+                if(i == 2 || i == 5 || i==8)
                 {
-                    Console.WriteLine("/n");
+                    Console.Write("\n");
                 }
             }
 
+            Console.WriteLine();
+            Console.WriteLine("Legend:");
             Console.WriteLine(legend);
 
         }
 
-        public void GameWinner(List<string> board)
+        // method
+        public string GameWinner(List<string> board)
         {
+            bool gameOver = false;
+            int spotToCheck = 0;
+            string winner = "noWinner";
+
                 for (int i = 0; i < 3; i++)
                 {
                     // Check rows
                     if (board[i * 3] == board[i * 3 + 1] && board[i * 3 + 1] == board[i * 3 + 2])
                     {
-                        return board[i * 3];
+                        gameOver = true;
+                        spotToCheck = i * 3;
                     }
 
                     // Check columns
                     if (board[i] == board[i + 3] && board[i + 3] == board[i + 6])
                     {
-                        return board[i];
+                        gameOver = true;
+                        spotToCheck = i;
                     }
                 }
 
                 // Check diagonals
                 if (board[0] == board[4] && board[4] == board[8])
                 {
-                    return board[0];
+                    gameOver = true;
+                    spotToCheck = 0;
                 }
 
                 if (board[2] == board[4] && board[4] == board[6])
                 {
-                    return board[2];
+                    gameOver = true;
+                    spotToCheck = 2;
                 }
 
-                return -1; // No winner yet
+            // check which player won
+            if (gameOver == true)
+            {
+                if (board[spotToCheck] == "x")
+                {
+                    Console.WriteLine("Congrats Player 1, that's a dub.");
+                    winner = "PlayerX";
+                }
+                else
+                {
+                    Console.WriteLine("Congrats Player 2, that's a dub.");
+                    winner = "PlayerO";
+                }
             }
-
+            return winner;
         }
     }
 }
