@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using System.Xml.Linq;
+
 namespace TicTacToe
 {
     internal class Support
@@ -16,10 +17,11 @@ namespace TicTacToe
         //Contain a method that prints the board based on the information passed to it
         //Contain a method that receives the game board array as input and returns if there is a
         //winner and who it was
+
         public void PrintBoard(List<string> board)
         {
             string legend = "0 1 2 \n3 4 5 \n6 7 8";
-            for (int i = 0; i < board.Count; i++)
+            for (int i = 0; i < board.Count; i++) 
             {
                 Console.Write(board[i]);
                 Console.Write(" ");
@@ -28,43 +30,50 @@ namespace TicTacToe
                     Console.Write("\n");
                 }
             }
+
             Console.WriteLine();
             Console.WriteLine("Legend:");
             Console.WriteLine(legend);
             Console.WriteLine();
         }
+
         // method
         public string GameWinner(List<string> board)
         {
             bool gameOver = false;
             int spotToCheck = 0;
             string winner = "noWinner";
-            for (int i = 0; i < 3; i++)
-            {
-                // Check rows
-                if (board[i * 3] == board[i * 3 + 1] && board[i * 3 + 1] == board[i * 3 + 2])
+
+                for (int i = 0; i < 3; i++)
+                {
+                    // Check rows
+                    if (board[i * 3] == board[i * 3 + 1] && board[i * 3 + 1] == board[i * 3 + 2])
+                    {
+                        gameOver = true;
+                        spotToCheck = i * 3;
+                    }
+
+                    // Check columns
+                    if (board[i] == board[i + 3] && board[i + 3] == board[i + 6])
+                    {
+                        gameOver = true;
+                        spotToCheck = i;
+                    }
+                }
+
+                // Check diagonals
+                if (board[0] == board[4] && board[4] == board[8])
                 {
                     gameOver = true;
-                    spotToCheck = i * 3;
+                    spotToCheck = 0;
                 }
-                // Check columns
-                if (board[i] == board[i + 3] && board[i + 3] == board[i + 6])
+
+                if (board[2] == board[4] && board[4] == board[6])
                 {
                     gameOver = true;
-                    spotToCheck = i;
+                    spotToCheck = 2;
                 }
-            }
-            // Check diagonals
-            if (board[0] == board[4] && board[4] == board[8])
-            {
-                gameOver = true;
-                spotToCheck = 0;
-            }
-            if (board[2] == board[4] && board[4] == board[6])
-            {
-                gameOver = true;
-                spotToCheck = 2;
-            }
+
             // check which player won
             if (gameOver == true)
             {
