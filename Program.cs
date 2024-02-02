@@ -30,6 +30,8 @@ internal class Program
 
             while (!isValidInput)
             {
+                sp.PrintBoard(gameBoard);
+
                 Console.WriteLine("X, it is your turn! Where would you like to go?");
                 bool isNumeric = int.TryParse(Console.ReadLine(), out input);
 
@@ -48,7 +50,6 @@ internal class Program
                 gameBoard[input] = "x";
                 movesCount++;
 
-                sp.PrintBoard(gameBoard);
                 sp.GameWinner(gameBoard);
 
                 if (movesCount >= 9)
@@ -65,6 +66,8 @@ internal class Program
             {
                 while (!isValidInput2)
                 {
+                    sp.PrintBoard(gameBoard);
+
                     Console.WriteLine("O, it is your turn! Where would you like to go?");
                     bool isNumeric = int.TryParse(Console.ReadLine(), out input);
 
@@ -83,7 +86,6 @@ internal class Program
                     gameBoard[input] = "o";
                     movesCount++;
 
-                    sp.PrintBoard(gameBoard);
                     sp.GameWinner(gameBoard);
                     
 
