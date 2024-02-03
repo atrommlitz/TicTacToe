@@ -54,6 +54,8 @@ internal class Program
 
                 if (movesCount >= 9)
                 {
+                    sp.PrintBoard(gameBoard);
+                    Console.WriteLine("Its a tie!");
                     gameOver = true; // End the game if board is full
                 }
             }
@@ -89,6 +91,8 @@ internal class Program
 
                     if (movesCount >= 9)
                     {
+                        sp.PrintBoard(gameBoard);
+                        Console.WriteLine("Its a tie!");
                         gameOver = true; // End the game if board is full or a win condition is met.
                     }
                 }
